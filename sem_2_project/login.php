@@ -7,30 +7,52 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
   $uname = $_POST["email"];
   $pwd = $_POST["password"];
 
-  $sql_uname_verify = "SELECT * FROM users WHERE email='$uname'";
-  $result_of_uname = mysqli_query($conn, $sql_uname_verify);
+  // $sql_credents_verify = "SELECT * FROM users WHERE email='$uname' AND password='$pwd'";
+  $sql_credents_verify = "SELECT * FROM users WHERE email='$uname'";
+  $result_of_credents = mysqli_query($conn, $sql_credents_verify);
 
-  if(mysqli_num_rows($result_of_uname) == 1){
-    $uname_exists = true;
-    $sql_pwd_verify = "SELECT password FROM users WHERE password='$pwd'";
-    $result_of_pwd_bool = mysqli_query($conn, $sql_pwd_verify);
-    $result_of_pwd = mysqli_query($conn, $sql_pwd_verify, MYSQLI_USE_RESULT);
-    if($result_of_pwd_bool){
-      if(mysqli_fetch_row($result_of_pwd)[0] == $pwd){
-        $pwd_exists = true;
-        header("location: index2.php");
-      }
-      else{
-        $pwd_exists = false;
-      }
+  if(mysqli_num_rows($result_of_credents) == 1){
+    $row = mysqli_fetch_assoc($result_of_credents);
+    if(password_verify($pwd, $row['password'])){
+      session_start();
+      $_SESSION['loggedin'] = true;
+      $_SESSION['username'] = $uname;
+      header("location: index2.php");
     }
     else{
       $pwd_exists = false;
+      // $uname_exists = false;
     }
   }
   else{
+    // $pwd_exists = false;
     $uname_exists = false;
   }
+
+  // $sql_uname_verify = "SELECT * FROM users WHERE email='$uname'";
+  // $result_of_uname = mysqli_query($conn, $sql_uname_verify);
+
+  // if(mysqli_num_rows($result_of_uname) == 1){
+  //   $uname_exists = true;
+  //   $sql_pwd_verify = "SELECT password FROM users WHERE password='$pwd'";
+  //   $result_of_pwd_bool = mysqli_query($conn, $sql_pwd_verify);
+  //   $result_of_pwd = mysqli_query($conn, $sql_pwd_verify, MYSQLI_USE_RESULT);
+  //   if($result_of_pwd_bool){
+  //     if(mysqli_fetch_row($result_of_pwd)[0] == $pwd){
+  //       $pwd_exists = true;
+  //       header("location: index2.php");
+  //     }
+  //     else{
+  //       $pwd_exists = false;
+  //     }
+  //   }
+  //   else{
+  //     $pwd_exists = false;
+  //   }
+  // }
+  // else{
+  //   $uname_exists = false;
+  // }
 }
 ?>
 
@@ -60,7 +82,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
   </symbol>
 </svg>
 <?php
-if(!$uname_exists OR !$pwd_exists){
+if(!$uname_exists AND !$pwd_exists){
 echo'
 <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show" role="alert">
   <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
