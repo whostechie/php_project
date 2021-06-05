@@ -21,7 +21,7 @@
                 <div>
                     <div class="relative pt-6 px-4 sm:px-6 lg:px-8">
                         <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start"
-                            aria-label="Global">
+                            aria-label="Global" style="justify-content: space-between;">
                             <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                                 <div class="flex items-center justify-between w-full md:w-auto">
                                     <a href="index2.php">
@@ -44,14 +44,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
-                                <!-- <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Product</a> -->
-
-                                <!-- <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Features</a> -->
-
-                                <!-- <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Marketplace</a> -->
-
-                                <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Categories</a>
+                            <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8" style="transform: translateX(100px);">
+                                <a href="categories.php" class="font-medium text-gray-500 hover:text-gray-900">Categories</a>
                                 <?php
                                 session_start();
                                 if(!isset($_SESSION['loggedin']) OR $_SESSION['loggedin']!=true){
@@ -78,10 +72,20 @@
                         </p>
                         <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                             <div class="rounded-md shadow">
-                                <a href="signup.php"
+                                <?php
+                                // session_start();
+                                if(!isset($_SESSION['loggedin']) OR $_SESSION['loggedin']!=true){
+                                    echo '<a href="signup.php"
                                     class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
                                     Get started
-                                </a>
+                                    </a>';
+                                }else{
+                                    echo '<a href="categories.php"
+                                    class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+                                    Explore
+                                    </a>';
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

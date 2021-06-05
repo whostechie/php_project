@@ -6,8 +6,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
   include "partials/connect.php";
   $uname = $_POST["email"];
   $pwd = $_POST["password"];
-
-  // $sql_credents_verify = "SELECT * FROM users WHERE email='$uname' AND password='$pwd'";
   $sql_credents_verify = "SELECT * FROM users WHERE email='$uname'";
   $result_of_credents = mysqli_query($conn, $sql_credents_verify);
 
@@ -21,11 +19,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     }
     else{
       $pwd_exists = false;
-      // $uname_exists = false;
     }
   }
   else{
-    // $pwd_exists = false;
     $uname_exists = false;
   }
 
