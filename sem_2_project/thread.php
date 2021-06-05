@@ -1,7 +1,15 @@
 <?php
-include "partials/connect.php";
+include 'partials/connect.php';
 session_start();
+
+// $query = "SELECT * FROM information_schema.tables WHERE table_schema = 'onestop' AND table_name = 'users';";
+// $result = mysqli_query($conn, $query);
+
+// $result_bool = mysqli_num_rows($result);
+// echo $result_bool;
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,100 +78,103 @@ session_start();
         </div>
     </div>
 
-
     <div class="container w-50">
         <?php
-        $ctg_id = $_GET['ctgid'];
-        $sql_query = "SELECT * FROM `categories` WHERE ctg_id=$ctg_id";
+        $thd_id = $_GET['thd_id'];
+        $sql_query = "SELECT * FROM `thread` WHERE thd_id=$thd_id";
         $result = mysqli_query($conn, $sql_query);
         $row = mysqli_fetch_assoc($result);
-        $ctg_name = $row['ctg_name'];
-        $ctg_desc = $row['ctg_desc'];
+        $thd_q = $row['thd_q'];
+        $thd_desc = $row['thd_desc'];
+        $thd_user_name = $row['thd_user_name'];
         echo '<div class="card text-center"
         style="border-radius: 8px;border-width: 2px;border-color: #4f46e5;margin-top: 20px;">
-        <div class="card-header" style="background-color: transparent;color: #4f46e5">
-            Forum
-        </div>
+        
         <div class="card-body">
-            <h5 class="card-title" style="font-size: 2.5rem; font-family: \'Impact\', sans-serif; font-weight: bold;">'.$ctg_name.'</h5>
-            <p class="card-text">'.$ctg_desc.'</p>
+            <h5 class="card-title" style="font-size: 1.5rem; font-family: \'Montserrat\', sans-serif; font-weight: bold;">'.$thd_q.'</h5>
+            <p class="card-text">'.$thd_desc.'</p>
         </div>
         <div class="card-footer text-muted" style="border-top: none;">
-            2K discussions
+            Posted By:- '.$thd_user_name.'
         </div>
         </div>';
         ?>
     </div>
 
 
-    <!-- <div class="container w-50 mt-4"> -->
-    <?php
-    $ctg_id = $_GET['ctgid'];
-    $sql_query_thread = "SELECT * FROM `thread` WHERE thd_cat_id=$ctg_id";
-    $result_thread = mysqli_query($conn, $sql_query_thread);
-    if(mysqli_num_rows($result_thread)!= 0){
-    // $row_thread = mysqli_fetch_assoc($result_thread);
-    while($row_thread = mysqli_fetch_assoc($result_thread)){
-        $thd_q = $row_thread['thd_q'];
-        $thd_desc = $row_thread['thd_desc'];
-        $thd_uname = $row_thread['thd_user_name'];
-        $thd_id = $row_thread['thd_id'];
-        echo
-        '<div class="container w-50 mt-4">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4" style="width: 20%;">
-                        <img src="assets/dp.png" alt="">
-                    </div>
-                    <div class="col-md-8" style="width: 80%;">
-                        <div class="card-body">
-                            <a href="thread.php?thd_id='.$thd_id.'"><h5 class="card-title" style="font-weight: bold;">'.$thd_q.'</h5></a>
-                            <p class="card-text">'.$thd_desc.'</p>';
-                            if(!isset($_SESSION['loggedin']) OR $_SESSION['loggedin']!=true){
-                                echo '<p class="card-text"><small class="text-muted">'.$thd_uname.'</small></p>';
-                            } 
-                            else { 
-                                echo '<p class="card-text"><small class="text-muted">'.$thd_uname.'</small></p>';
-                            };
-                        echo '</div>
+    <div class="container w-50 mt-4">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4" style="width: 20%;">
+                    <img src="assets/dp.png" alt="">
+                </div>
+                <div class="col-md-8" style="width: 80%;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                     </div>
                 </div>
             </div>
-        </div>';
-    }
-    } else {
-        echo '
-        <div class="container w-50">
-        <div class="card text-center"
-        style="border-radius: 8px;margin-top: 20px;">
-        
-        <div class="card-body">
-            <h5 class="card-title" style="font-size: 2.5rem; font-family: \'Montserrat\', sans-serif;">No results found</h5>
-            <p class="card-text">Didn\'t find what you are looking for? Post a new question</p>
         </div>
-        
+    </div>
+
+    <div class="container w-50 mt-4">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4" style="width: 20%;">
+                    <img src="assets/dp.png" alt="">
+                </div>
+                <div class="col-md-8" style="width: 80%;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>';
-    }
-    ?>
-    <!-- </div> -->
+    </div>
 
-    <!-- <div class="container w-50 mb-20 mt-20">
-        <a class="btn btn-primary" style="background-color: #4f46e5; border-color: #4f46e5;" href="#" role="button">Post
-            a new question</a>
-    </div> -->
+    <div class="container w-50 mt-4">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4" style="width: 20%;">
+                    <img src="assets/dp.png" alt="">
+                </div>
+                <div class="col-md-8" style="width: 80%;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="container w-50 mt-4">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4" style="width: 20%;">
+                    <img src="assets/dp.png" alt="">
+                </div>
+                <div class="col-md-8" style="width: 80%;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container w-50 mb-20 mt-20">
-    <?php
-    if(!isset($_SESSION['loggedin']) OR $_SESSION['loggedin']!=true){
-        echo '<a class="btn btn-primary" style="background-color: #4f46e5; border-color: #4f46e5;" href="login.php" role="button">Post
-        a new question</a>';
-    } 
-    else { 
-        echo '<a class="btn btn-primary" style="background-color: #4f46e5; border-color: #4f46e5;" href="new_thread.php?ctgid='.$_GET['ctgid'].'" role="button">Post
-        a new question</a>';
-    }
-    ?>
+    <a class="btn btn-primary" style="background-color: #4f46e5; border-color: #4f46e5;" href="#" role="button">Post a new question</a>
     </div>
 
 

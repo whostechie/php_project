@@ -78,7 +78,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
   </symbol>
 </svg>
 <?php
-if(!$uname_exists AND !$pwd_exists){
+if(!$uname_exists OR !$pwd_exists){
 echo'
 <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show" role="alert">
   <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
