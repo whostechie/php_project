@@ -86,7 +86,7 @@ include "partials/connect.php";
                         echo '<div class="xl:w-1/4 md:w-1/2 p-4">
                                 <div class="bg-gray-100 p-6 rounded-lg">
                                     <img class="h-40 rounded w-full object-cover object-center mb-6"
-                                        src="https://dummyimage.com/720x400" alt="content">
+                                        src="./assets/'.$ctg_name.'.jpg" alt="content">
                                     <h3 class="tracking-widest text-blue-500 text-xs font-medium title-font"
                                         style="color: #4f46e5;">Category</h3>
                                     <h2 class="text-lg text-gray-900 font-medium title-font mb-4"><a href="forum.php?ctgid='.$ctg_id.'">'.$ctg_name.'</a></h2>
